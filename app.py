@@ -1,3 +1,4 @@
+@'
 from flask import Flask, request
 import requests
 import anthropic
@@ -53,7 +54,7 @@ def webhook():
         reply = ask_claude(text)
     except Exception as e:
         logger.exception("Claude error: %s", e)
-        reply = "⚠️ Something went wrong. Try again."
+        reply = "Something went wrong. Try again."
 
     try:
         send_telegram(chat_id, reply)
@@ -65,3 +66,4 @@ def webhook():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+'@ | Set-Content -Path "app.py"
